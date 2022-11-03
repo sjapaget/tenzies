@@ -33,18 +33,20 @@ export default function App() {
         return newDice
     }
 
-    function rollDice() {
-        if(!tenzies) {
-            setDice(oldDice => oldDice.map(die => {
-                return die.isHeld ?
-                    die :
-                    generateNewDie()
-            }))
-        } else {
-            setTenzies(false)
-            setDice(allNewDice())
-        }
+    function resetGame() {
+      setTenzies(false)
+      setDice(allNewDice())
     }
+
+    function rollDice() {
+      setDice(oldDice => oldDice.map(die => {
+        return die.isHeld ?
+        die :
+        generateNewDie()
+      }))
+    }
+
+
 
     function holdDice(id) {
         setDice(oldDice => oldDice.map(die => {
@@ -74,7 +76,7 @@ export default function App() {
             </div>
             <button
                 className="roll-dice"
-                onClick={rollDice}
+                onClick={tenzies ? resetGame : rollDice}
             >
                 {tenzies ? "New Game" : "Roll"}
             </button>
